@@ -1,0 +1,19 @@
+server:
+  port: 7529
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=source, xiaoxin
+      routes:
+        - id: api_route
+          uri: http://localhost:7121
+          predicates:
+            - Path=/api/**
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+
