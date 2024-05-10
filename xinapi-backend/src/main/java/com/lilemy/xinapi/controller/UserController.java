@@ -15,7 +15,6 @@ import com.lilemy.xinapi.model.dto.user.UserQueryRequest;
 import com.lilemy.xinapi.model.dto.user.UserRegisterRequest;
 import com.lilemy.xinapi.model.dto.user.UserUpdateMyRequest;
 import com.lilemy.xinapi.model.dto.user.UserUpdateRequest;
-import com.lilemy.xinapi.model.entity.User;
 import com.lilemy.xinapi.model.vo.LoginUserVO;
 import com.lilemy.xinapi.model.vo.UserVO;
 import com.lilemy.xinapi.service.UserService;
@@ -24,6 +23,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.lilemy.xinapicommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

@@ -11,7 +11,6 @@ import com.lilemy.xinapi.constant.CommonConstant;
 import com.lilemy.xinapi.exception.BusinessException;
 import com.lilemy.xinapi.mapper.UserMapper;
 import com.lilemy.xinapi.model.dto.user.UserQueryRequest;
-import com.lilemy.xinapi.model.entity.User;
 import com.lilemy.xinapi.model.enums.UserRoleEnum;
 import com.lilemy.xinapi.model.vo.LoginUserVO;
 import com.lilemy.xinapi.model.vo.UserVO;
@@ -23,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
-import com.lilemy.xinapiclientsdk.utils.SignUtils;
+import com.lilemy.xinapicommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

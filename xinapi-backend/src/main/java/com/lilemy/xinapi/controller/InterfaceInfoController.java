@@ -12,16 +12,15 @@ import com.lilemy.xinapi.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.lilemy.xinapi.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.lilemy.xinapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.lilemy.xinapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
-import com.lilemy.xinapi.model.entity.InterfaceInfo;
-import com.lilemy.xinapi.model.entity.User;
 import com.lilemy.xinapi.model.enums.InterfaceInfoStatusEnum;
 import com.lilemy.xinapi.model.vo.InterfaceInfoVO;
 import com.lilemy.xinapi.service.InterfaceInfoService;
 import com.lilemy.xinapi.service.UserService;
 import com.lilemy.xinapiclientsdk.client.XinApiClient;
 import com.lilemy.xinapiclientsdk.model.OperationNumber;
+import com.lilemy.xinapicommon.model.entity.InterfaceInfo;
+import com.lilemy.xinapicommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 

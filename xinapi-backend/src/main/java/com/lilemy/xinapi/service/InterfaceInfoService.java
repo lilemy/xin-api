@@ -3,9 +3,9 @@ package com.lilemy.xinapi.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lilemy.xinapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
-import com.lilemy.xinapi.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lilemy.xinapi.model.vo.InterfaceInfoVO;
+import com.lilemy.xinapicommon.model.entity.InterfaceInfo;
 
 import javax.servlet.http.HttpServletRequest;
 

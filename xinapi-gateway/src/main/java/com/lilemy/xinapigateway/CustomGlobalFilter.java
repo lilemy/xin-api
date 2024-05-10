@@ -2,7 +2,13 @@ package com.lilemy.xinapigateway;
 
 import cn.hutool.core.net.URLDecoder;
 import com.lilemy.xinapiclientsdk.utils.SignUtils;
+import com.lilemy.xinapicommon.model.entity.InterfaceInfo;
+import com.lilemy.xinapicommon.model.entity.User;
+import com.lilemy.xinapicommon.service.InnerInterfaceInfoService;
+import com.lilemy.xinapicommon.service.InnerUserInterfaceInfoService;
+import com.lilemy.xinapicommon.service.InnerUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -34,8 +40,16 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Component
 public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
-    private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
+    @DubboReference
+    private InnerUserService innerUserService;
 
+    @DubboReference
+    private InnerInterfaceInfoService innerInterfaceInfoService;
+
+    @DubboReference
+    private InnerUserInterfaceInfoService innerUserInterfaceInfoService;
+
+    private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
 
     private static final String INTERFACE_HOST = "http://localhost:7121";
 
@@ -45,13 +59,13 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         String path = INTERFACE_HOST + request.getPath().value();
         String method = Objects.requireNonNull(request.getMethod()).toString();
-        log.info("请求唯一标识：" + request.getId());
-        log.info("请求路径：" + path);
-        log.info("请求方法：" + method);
-        log.info("请求参数：" + request.getQueryParams());
+        log.info("请求唯一标识：{}", request.getId());
+        log.info("请求路径：{}", path);
+        log.info("请求方法：{}", method);
+        log.info("请求参数：{}", request.getQueryParams());
         String sourceAddress = Objects.requireNonNull(request.getLocalAddress()).getHostString();
-        log.info("请求来源地址：" + sourceAddress);
-        log.info("请求来源地址：" + request.getRemoteAddress());
+        log.info("请求来源地址：{}", sourceAddress);
+        log.info("请求来源地址：{}", request.getRemoteAddress());
         ServerHttpResponse response = exchange.getResponse();
         // 2. 访问控制 - 黑白名单
         if (!IP_WHITE_LIST.contains(sourceAddress)) {
@@ -75,14 +89,14 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         if (invokeUser == null) {
             return handleNoAuth(response);
         }
-
-        if (Long.parseLong(nonce) > 10000L) {
+        if (nonce == null || Long.parseLong(nonce) > 10000L) {
             return handleNoAuth(response);
         }
         // 时间和当前时间不能超过 5 分钟
-        Long currentTime = System.currentTimeMillis() / 1000;
-        final Long FIVE_MINUTES = 60 * 5L;
-        if ((currentTime - Long.parseLong(timestamp)) >= FIVE_MINUTES) {
+        long currentTime = System.currentTimeMillis() / 1000;
+        final long FIVE_MINUTES = 60 * 5L;
+
+        if (timestamp == null || (currentTime - Long.parseLong(timestamp)) >= FIVE_MINUTES) {
             return handleNoAuth(response);
         }
         // 实际情况中是从数据库中查出 secretKey
@@ -151,7 +165,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
                                         String data = new String(content, UTF_8); //data
                                         sb2.append(data);
                                         // 打印日志
-                                        log.info("响应结果：" + data);
+                                        log.info("响应结果：{}", data);
                                         return bufferFactory.wrap(content);
                                     }));
                         } else {

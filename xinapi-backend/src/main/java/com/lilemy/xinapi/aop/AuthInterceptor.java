@@ -3,11 +3,12 @@ package com.lilemy.xinapi.aop;
 import com.lilemy.xinapi.annotation.AuthCheck;
 import com.lilemy.xinapi.common.ErrorCode;
 import com.lilemy.xinapi.exception.BusinessException;
-import com.lilemy.xinapi.model.entity.User;
 import com.lilemy.xinapi.model.enums.UserRoleEnum;
 import com.lilemy.xinapi.service.UserService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.lilemy.xinapicommon.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

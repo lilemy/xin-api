@@ -1,7 +1,7 @@
 package com.lilemy.xinapi.service;
 
-import com.lilemy.xinapi.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lilemy.xinapicommon.model.entity.UserInterfaceInfo;
 
 /**
 * @author qq233

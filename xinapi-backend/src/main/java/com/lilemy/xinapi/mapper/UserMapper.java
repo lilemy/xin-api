@@ -1,7 +1,7 @@
 package com.lilemy.xinapi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lilemy.xinapi.model.entity.User;
+import com.lilemy.xinapicommon.model.entity.User;
 
 /**
  * 用户数据库操作

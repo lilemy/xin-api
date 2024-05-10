@@ -3,9 +3,9 @@ package com.lilemy.xinapi.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lilemy.xinapi.model.dto.user.UserQueryRequest;
-import com.lilemy.xinapi.model.entity.User;
 import com.lilemy.xinapi.model.vo.LoginUserVO;
 import com.lilemy.xinapi.model.vo.UserVO;
+import com.lilemy.xinapicommon.model.entity.User;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
