@@ -73,7 +73,7 @@ public class XinApiClient {
      */
     private String getOperationNum(OperationNumber number, String operation) {
         String json = JSONUtil.toJsonStr(number);
-        HttpResponse httpResponse = HttpRequest.post("http://localhost:7121/api/operation/" + operation)
+        HttpResponse httpResponse = HttpRequest.post(GATEWAY_HOST + "/api/operation/" + operation)
                 .addHeaders(getHeaderMap(json))
                 .body(json)
                 .execute();

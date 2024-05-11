@@ -51,7 +51,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
 
-    private static final String INTERFACE_HOST = "http://localhost:7121";
+    private static final String INTERFACE_HOST = "http://localhost:7529";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -79,7 +79,6 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         String timestamp = headers.getFirst("timestamp");
         String sign = headers.getFirst("sign");
         String body = URLDecoder.decode(headers.getFirst("body"), UTF_8);// 解决中文乱码
-        // todo 实际情况应该是去数据库中查是否已分配给用户
         User invokeUser = null;
         try {
             invokeUser = innerUserService.getInvokeUser(accessKey);
@@ -197,6 +196,11 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     public Mono<Void> handleInvokeError(ServerHttpResponse response) {
         response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+        return response.setComplete();
+    }
+
+    public Mono<Void> handleRequestError(ServerHttpResponse response) {
+        response.setStatusCode(HttpStatus.BAD_REQUEST);
         return response.setComplete();
     }
 }

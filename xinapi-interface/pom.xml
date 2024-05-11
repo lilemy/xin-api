@@ -24,6 +24,11 @@
 
         <dependency>
             <groupId>com.lilemy</groupId>
+            <artifactId>xinapi-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lilemy</groupId>
             <artifactId>xinapi-client-sdk</artifactId>
             <version>0.0.1</version>
         </dependency>
